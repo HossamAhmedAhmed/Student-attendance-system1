@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+
+    <!-- navbar -->
+     <nav class="p-3">
+        <div class="container d-flex justify-content-between">
+        <div>
+            نظام حضور وغياب الطالب
+        </div>
+        <div class="d-flex gap-3 align-items-center">
+            <i class="fa-solid fa-gear"></i>
+            <span class="icon"><i class="fa-regular fa-user"></i></span>
+        </div>
+        </div>
+    </nav>
+    <!-- navbar -->
+
+    <!-- details -->
+     <div class="container py-4">
+        <h2 class="h4 title rounded-top-3 p-2 mb-2 text-center" id="dates">التاريخ :</h2>
+        
+        <div class="row g-4">
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="inner bg-white p-2 px-3 rounded-3 shadow-sm">
+                    <h2 class="h4 m-0">اجمالى الطلاب</h2>
+                    <span class="fw-bold fs-4 text-primary" id="total">0</span>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="inner bg-white p-2 px-3 rounded-3 shadow-sm">
+                    <h2 class="h4 m-0">الحضور</h2>
+                    <span class="fw-bold fs-4 text-success" id="present">0</span>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="inner bg-white p-2 px-3 rounded-3 shadow-sm">
+                    <h2 class="h4 m-0">الغياب</h2>
+                    <span class="fw-bold fs-4 text-danger" id="absent">0</span>
+                </div>
+            </div>
+        </div>
+     </div>
+    <!-- details -->
+
+
+    <!-- StudentData -->
+     <div class="container py-4">
+        <h2 class="h4 title rounded-top-3 p-2 mb-0">اضافة / تعديل بيانات طالب</h2>
+    
+       <div class="container bg-white rounded-bottom-3 pb-3">
+         <div class="row mt-0">
+            <div class="col-12 col-md-6 col-lg-4 col-xl-3 py-4">
+                <div class="inner">
+                    <label for="stName">اسم الطالب:</label>
+                    <input type="text" class="form-control" id="stName" oninput="validation(this,'nameMsg')">
+                    <p class="text-danger d-none" id="nameMsg">يجب ادخال الاسم باللغة العربية</p>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-4 col-xl-3 py-4">
+                <div class="inner">
+                    <label for="stNum">رقم ولى الامر:</label>
+                    <input type="tel" class="form-control" id="stNum" oninput="validation(this,'numMsg')">
+                    <p class="text-danger d-none" id="numMsg">قم بادخال 11 رقم مصرى</p>
+                </div>
+            </div>
+
+            
+            <div class="col-12 col-md-6 col-lg-4 col-xl-3 py-4">
+                <div class="inner">
+                    <label for="stPresent">تسجيل الحضور:</label>
+                    <select name="" id="stPresent" class="form-select" onchange="validation(this,'prMsg')">
+                        <option value="" selected hidden disabled>تسجيل الحضور</option>
+                        <option>حاضر</option>
+                        <option>غائب</option>
+                    </select>
+                    <p class="text-danger d-none" id="prMsg">اختار حاضر او غائب</p>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-4 col-xl-3 py-4">
+                <div class="inner">
+                    <label for="stGroup">المجموعة:</label>
+                    <select name="" id="stGroup" class="form-select" onchange="validation(this,'grMsg')">
+                        <option value="" selected hidden disabled>المجموعة</option>
+                        <option>السبت و الثلاثاء</option>
+                        <option>الاحد و الاربعاء</option>
+                        <option>الاثنين و الخميس</option>
+                        <option>الجمعة</option>
+                    </select>
+                    <p class="text-danger d-none" id="grMsg">اختار المجموعة</p>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-4 col-xl-3 py-4">
+                <div class="inner">
+                    <label for="stClock">الساعة:</label>
+                    <input type="time" class="form-control" id="stClock">
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-4 col-xl-3 py-4">
+                <div class="inner">
+                    <label for="stDate">التاريخ:</label>
+                    <input type="date" class="form-control" id="stDate" required>
+                    <p class="text-danger d-none" id="dtMsg">حدد التاريخ</p>
+                </div>
+            </div>
+
+        </div>
+        <div class="text-center">
+        <button class="btn btn-add" id="addBtn">اضافة طالب</button>
+        </div>
+       </div>
+        
+     </div>
+    <!-- StudentData -->
+
+
+    <!-- Search Data -->
+    <div class="container py-4">
+        <h2 class="h4 title rounded-top-3 p-2 mb-0">البحث والفلترة</h2>
+    
+       <div class="container bg-white rounded-bottom-3 pb-3">
+            <div class="row g-4 mt-0">
+                
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="inner">
+                        <select name="" id="stGroupSearch" class="form-select">
+                        <option value="" selected hidden disabled>المجموعة</option>
+                        <option>السبت و الثلاثاء</option>
+                        <option>الاحد و الاربعاء</option>
+                        <option>الاثنين و الخميس</option>
+                        <option>الجمعة</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="inner">
+                     <input type="date" class="form-control" id="stDateSearch">
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="inner">
+                        <select name="" id="logSearch" class="form-select">
+                        <option value="" selected hidden disabled>الكل</option>
+                        <option>حاضر</option>
+                        <option>غائب</option>
+                        <option value="">الكل</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+        <button class="btn btn-add mt-3" id="searchBtn" onclick="searchInputs()">بحث متقدم</button>
+
+       </div>
+    </div>   
+    <!-- Search Data -->
+
+
+    <!-- tableData -->
+    <div class="container">
+        <h2 class="h4 title rounded-top-3 p-2 mb-0">جدول الطالب التفاعلى</h2>
+        <div class="container bg-white rounded-bottom-3 py-3">
+            <div class="col-12 col-md-6 col-lg-4 mb-3">
+                    <div class="inner">
+                        <input type="search" class="form-control" oninput="displayStudent()" placeholder="بحث بالاسم .........." id="searchName">
+                    </div>
+            </div>
+
+            <div class="table-card border rounded overflow-x-auto">
+
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th>م</th>
+                            <th>اسم الطالب</th>
+                            <th>المجموعة</th>
+                            <th>الساعة</th>
+                            <th>رقم ولى الامر</th>
+                            <th>التاريخ</th>
+                            <th>تسجيل الحضور</th>
+                            <th>اجراءات</th>
+                        </tr>
+                    </thead>
+    
+                    <tbody class="table-group-divider" id="dataRow">
+                        
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- tableData -->
+    
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/index.js"></script>
+</body>
+</html>
